@@ -2,7 +2,6 @@ from dataclasses import dataclass, field
 from typing import List
 
 import cloudscraper
-import httpx
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import FileResponse

@@ -1,82 +1,56 @@
-# start-fastapi 帮助文档
+# acrnm-api
 
-<p align="center" class="flex justify-center">
-    <a href="https://www.serverless-devs.com" class="ml-1">
-    <img src="http://editor.devsapp.cn/icon?package=start-fastapi&type=packageType">
-  </a>
-  <a href="http://www.devsapp.cn/details.html?name=start-fastapi" class="ml-1">
-    <img src="http://editor.devsapp.cn/icon?package=start-fastapi&type=packageVersion">
-  </a>
-  <a href="http://www.devsapp.cn/details.html?name=start-fastapi" class="ml-1">
-    <img src="http://editor.devsapp.cn/icon?package=start-fastapi&type=packageDownload">
-  </a>
-</p>
+这是一个现代、快速、高性能的基于 FastAPI 编写的解析网站为接口的后端.
 
-<description>
+### 使用
 
-FastAPI是一个现代、快速（高性能）的 Web 框架，基于标准的 Python 语言编写
+被解析网址 [acrnm.com/index](https://acrnm.com/index?sort=default&filter=txt)
 
-</description>
+该项目部署在阿里云 [Serverless 后端](http://fastapi.web-framework-2ml5.1990019364850918.cn-hangzhou.fc.devsapp.net)
 
-<table>
+目前提供了两个接口：`/` 与 `/image`
 
-## 前期准备
-使用该项目，推荐您拥有以下的产品权限 / 策略：
+#### `/` 接口
 
-| 服务/业务 | 函数计算 |     
-| --- |  --- |   
-| 权限/策略 | AliyunFCFullAccess |  
+返回原网页的商品列表。
 
-</table>
+响应示例：
 
-<codepre id="codepre">
+```json
+[
+    {
+        "name": "J123A-GT",
+        "href": "/J123A-GT_SS24",
+        "price": "1,458.00 EUR",
+        "variants": [
+            {
+                "color": "black",
+                "size": "XS/S"
+            },
+            {
+                "color": "alpha_green",
+                "size": "XS/S/M"
+            }
+        ]
+    },
+    ...
+]
+```
 
-# 代码 & 预览
+#### `/image` 接口
 
-- [ :smiley_cat:  源代码](https://github.com/devsapp/start-web-framework/blob/master/web-framework/python/fastapi)
+返回某商品的第一张展示图链接。
 
-</codepre>
+使用该接口时应传入该商品的 `href`
 
-<deploy>
+调用示例：
 
-## 部署 & 体验
+```
+/image/J118-WS_SS24
+```
 
-<appcenter>
+响应示例：
 
--  :fire:  通过 [Serverless 应用中心](https://fcnext.console.aliyun.com/applications/create?template=start-fastapi) ，
-[![Deploy with Severless Devs](https://img.alicdn.com/imgextra/i1/O1CN01w5RFbX1v45s8TIXPz_!!6000000006118-55-tps-95-28.svg)](https://fcnext.console.aliyun.com/applications/create?template=start-fastapi)  该应用。 
-
-</appcenter>
-
-- 通过 [Serverless Devs Cli](https://www.serverless-devs.com/serverless-devs/install) 进行部署：
-    - [安装 Serverless Devs Cli 开发者工具](https://www.serverless-devs.com/serverless-devs/install) ，并进行[授权信息配置](https://www.serverless-devs.com/fc/config) ；
-    - 初始化项目：`s init start-fastapi -d start-fastapi`   
-    - 进入项目，并进行项目部署：`cd start-fastapi && s deploy -y`
-
-</deploy>
-
-<appdetail id="flushContent">
-
-# 应用详情
-
-
-本应用仅作为学习和参考使用，您可以基于本项目进行二次开发和完善，实现自己的业务逻辑
-
-
-</appdetail>
-
-<devgroup>
-
-## 开发者社区
-
-您如果有关于错误的反馈或者未来的期待，您可以在 [Serverless Devs repo Issues](https://github.com/serverless-devs/serverless-devs/issues) 中进行反馈和交流。如果您想要加入我们的讨论组或者了解 FC 组件的最新动态，您可以通过以下渠道进行：
-
-<p align="center">
-
-| <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407298906_20211028074819117230.png" width="130px" > | <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407044136_20211028074404326599.png" width="130px" > | <img src="https://serverless-article-picture.oss-cn-hangzhou.aliyuncs.com/1635407252200_20211028074732517533.png" width="130px" > |
-|--- | --- | --- |
-| <center>微信公众号：`serverless`</center> | <center>微信小助手：`xiaojiangwh`</center> | <center>钉钉交流群：`33947367`</center> | 
-
-</p>
-
-</devgroup>
+```
+"https://acrnm.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNWJrQVE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--40b550a0eb67cefb443dfbd7e639d2d4bfbb490f/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDRG9MWm05eWJXRjBPZ2wzWldKd09oUnlaWE5wZW1WZmRHOWZiR2x0YVhSYkIya0NZQWxwQW1BSk9neGpiMjUyWlhKME93WT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--3d0ae92aa09fe6f90cb74abd0968f1648b3acb0e/J118-DS_1216.jpg"
+```
