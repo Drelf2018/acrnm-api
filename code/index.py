@@ -24,7 +24,7 @@ class Product:
 
 
 def get_page_root() -> etree._Element:
-    resp = scraper.get("https://acrnm.com/index?sort=default&filter=txt").text
+    resp = scraper.get("https://acrnm.com?sort=default&filter=txt").text
     return etree.HTML(resp)
 
 
