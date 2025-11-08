@@ -10,10 +10,12 @@ from lxml import etree
 app = FastAPI()
 scraper = cloudscraper.create_scraper()
 
+
 @dataclass
 class Variant:
     color: str
     size: str
+
 
 @dataclass
 class Product:
@@ -30,13 +32,13 @@ def get_page_root() -> etree._Element:
 
 def parse_products(root: etree._Element) -> List[Product]:
     products = []
-    table: List[etree._Element] = root.cssselect(".m-product-table__row")
+    table: List[etree._Element] = root.cssselect(".m-content-item-table__row")
     for tr in table:
-        price = tr.xpath("./td[4]/span/text()")
-        if len(price) == 0:
+        price = tr.xpath("./td[5]/span/text()")
+        if len(price) == 0 or price[0] == "—":
             continue
         product = Product(tr.xpath("./td[1]/a/span/text()")[0], tr.xpath("./td[1]/a/@href")[0], price[0])
-        variants: List[etree._Element] = tr.xpath("./td[3]/div/span")
+        variants: List[etree._Element] = tr.xpath("./td[4]/div/span")
         for var in variants:
             color = ", ".join(var.xpath("./div/span/text()"))
             size = ", ".join(var.xpath("./span/text()"))
